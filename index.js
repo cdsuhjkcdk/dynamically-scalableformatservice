@@ -1,3 +1,9 @@
-const originalObject = { name: "Alice", age: 30 };
-const clonedObject = JSON.parse(JSON.stringify(originalObject));
-console.log(clonedObject); // { name: "Alice", age: 30 }
+function groupAnagrams(strs) {
+  const map = new Map();
+  for (const str of strs) {
+    const sortedStr = str.split("").sort().join("");
+    if (!map.has(sortedStr)) map.set(sortedStr, []);
+    map.get(sortedStr).push(str);
+  }
+  return [...map.values()];
+}
