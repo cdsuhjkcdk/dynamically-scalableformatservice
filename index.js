@@ -1,22 +1,15 @@
-function permuteUnique(nums) {
-  nums.sort((a, b) => a - b);
-  const result = [];
-  const used = new Array(nums.length).fill(false);
-  backtrack([]);
-  return result;
-  function backtrack(permutation) {
-    if (permutation.length === nums.length) {
-      result.push([...permutation]);
-      return;
-    }
-    for (let i = 0; i < nums.length; i++) {
-      if (used[i] || (i > 0 && nums[i] === nums[i - 1] && !used[i - 1]))
-        continue;
-      used[i] = true;
-      permutation.push(nums[i]);
-      backtrack(permutation);
-      permutation.pop();
-      used[i] = false;
-    }
+function minMeetingRoomsII(intervals) {
+  const startTimes = intervals
+    .map((interval) => interval[0])
+    .sort((a, b) => a - b);
+  const endTimes = intervals
+    .map((interval) => interval[1])
+    .sort((a, b) => a - b);
+  let rooms = 0;
+  let endIdx = 0;
+  for (let i = 0; i < startTimes.length; i++) {
+    if (startTimes[i] < endTimes[endIdx]) rooms++;
+    else endIdx++;
   }
+  return rooms;
 }
